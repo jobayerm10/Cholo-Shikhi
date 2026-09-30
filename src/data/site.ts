@@ -7,6 +7,8 @@ export const site = {
   address: 'ধানমন্ডি, ঢাকা-১২০৯, বাংলাদেশ',
   facebook: 'https://facebook.com/',
   youtube: 'https://youtube.com/',
+  whatsappLink: 'https://wa.me/8801700000000',
+  messengerLink: 'https://m.me/choloshikhi',
   copyright: '© ২০২৬ চলো শিখি। সর্বস্বত্ব সংরক্ষিত।',
 }
 
