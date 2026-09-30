@@ -1,30 +1,37 @@
 import { MotionConfig } from 'framer-motion'
-import Navbar from './components/Navbar'
-import Hero from './components/Hero'
-import Courses from './components/Courses'
-import Reviews from './components/Reviews'
-import Notices from './components/Notices'
-import About from './components/About'
-import Contact from './components/Contact'
-import Footer from './components/Footer'
-import FloatingContact from './components/FloatingContact'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import Landing from './pages/Landing'
+import ProtectedRoute from './admin/ProtectedRoute'
+import AdminLayout from './admin/AdminLayout'
+import AdminLogin from './admin/AdminLogin'
+import Dashboard from './admin/pages/Dashboard'
+import Messages from './admin/pages/Messages'
+import Courses from './admin/pages/Courses'
+import Students from './admin/pages/Students'
 
 export default function App() {
   return (
     <MotionConfig reducedMotion="user">
-      <div className="min-h-screen bg-night">
-        <Navbar />
-        <main>
-          <Hero />
-          <Courses />
-          <Reviews />
-          <Notices />
-          <About />
-          <Contact />
-        </main>
-        <Footer />
-        <FloatingContact />
-      </div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path="/courses" element={<Landing section="courses" />} />
+          <Route path="/contact" element={<Landing section="contact" />} />
+
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin" element={<ProtectedRoute />}>
+            <Route element={<AdminLayout />}>
+              <Route index element={<Navigate to="dashboard" replace />} />
+              <Route path="dashboard" element={<Dashboard />} />
+              <Route path="messages" element={<Messages />} />
+              <Route path="courses" element={<Courses />} />
+              <Route path="students" element={<Students />} />
+            </Route>
+          </Route>
+
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </BrowserRouter>
     </MotionConfig>
   )
 }
